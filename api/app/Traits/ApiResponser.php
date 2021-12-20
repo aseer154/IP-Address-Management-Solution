@@ -16,7 +16,10 @@ trait ApiResponser
      */
     public function successResponse($data, int $code = Response::HTTP_OK)
     {
-        return response()->json(['data' => $data], $code);
+        return response()->json([
+            'success' => true,
+            'data' => $data
+        ], $code);
     }
 
     /**
@@ -29,6 +32,10 @@ trait ApiResponser
      */
     public function errorResponse($message, int $code)
     {
-        return response()->json(['error' => $message, 'code' => $code], $code);
+        return response()->json([
+            'success' => false,
+            'error' => $message,
+            'code' => $code
+        ], $code);
     }
 }

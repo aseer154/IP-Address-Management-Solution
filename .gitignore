@@ -1,5 +1,5 @@
-/api/vendor/
-/client/node_modules/
+api/vendor/
+client/node_modules/
 npm-debug.log
 yarn-error.log
 
@@ -21,3 +21,7 @@ api/Homestead.yaml
 api/Homestead.json
 /.vagrant
 .phpunit.result.cache
+
+client/.env
+client/coverage
+client/build
