@@ -31,3 +31,13 @@ Route::group([
         Route::get('user', 'AuthController@user');
     });
 });
+
+Route::group([
+    'middleware' => 'auth:api'
+], function() {
+    Route::get('ipAddress', 'IpAddressController@index');
+    Route::post('ipAddress', 'IpAddressController@store');
+    Route::get('ipAddress/{id}', 'IpAddressController@show');
+    Route::put('ipAddress/{id}', 'IpAddressController@update');
+    Route::patch('ipAddress/{id}', 'IpAddressController@update');
+});
