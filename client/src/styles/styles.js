@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles(theme => ({
     homeRoot: {
         display: 'flex',
+        marginTop: '100px',
         '& > *': {
             margin: theme.spacing(1),
         },
@@ -25,7 +26,11 @@ export const useStyles = makeStyles(theme => ({
         right: '25%',
         width: '50%',
         marginBottom: '50px',
-        marginTop: '60px'
+        marginTop: '160px'
+    },
+    rightItem: {
+        marginLeft: "auto",
+        marginRight: 0,
     },
     fullWidth: {
         width: '90%',

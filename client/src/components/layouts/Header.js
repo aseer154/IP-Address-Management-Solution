@@ -6,7 +6,6 @@ import { LogoutAction } from '../../redux/actions/AuthActions';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
-import {AlarmOffOutlined} from "@material-ui/icons";
 
 export default function Header(props) {
     let navigate = useNavigate();
@@ -17,11 +16,11 @@ export default function Header(props) {
 
     const logout = () => {
         dispatch(LogoutAction());
-        navigate("/home");
+        navigate("/");
     }
 
     const login = () => {
-        navigate('/auth/login');
+        navigate('/user/login');
     }
 
     const token = localStorage.getItem('user-token');
@@ -42,7 +41,7 @@ export default function Header(props) {
             <AppBar position="fixed" className={classes.header}>
                 <Toolbar>
                     <Typography variant="h6" noWrap className={classes.title}>
-                        <Link to="/home" className={classes.link}>IP Address Management</Link>
+                        <Link to="/" className={classes.link}>IP Address Management</Link>
                     </Typography>
                     <Typography variant="h6" noWrap className={classes.title}>
                         Welcome

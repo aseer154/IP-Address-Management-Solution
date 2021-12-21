@@ -22,19 +22,19 @@ export const RegisterAction = (credentials) => {
     }
 }
 
-export const LoginAction = (credentials, history) => {
+export const LoginAction = (credentials, navigate) => {
     return (dispatch) => {
         dispatch({ type: ActionTypes.RESTART_AUTH_RESPONSE });
         dispatch({ type: ActionTypes.LOADING });
 
         LoginUserService(credentials)
             .then((res) => {
-                if (res.hasOwnProperty('succes') && res.succes === true)
+                if (res.hasOwnProperty('success') && res.success === true)
                 {
-                    localStorage.setItem('user-token', res.access_token);
+                    localStorage.setItem('user-token', res.data.access_token);
                     dispatch({ type: ActionTypes.LOGIN_SUCCESS });
                     setTimeout(() => {
-                        history.push('/user');
+                        navigate('/');
                     }, 1500);
                 }
                 else if (res.hasOwnProperty('success') && res.succes === false)

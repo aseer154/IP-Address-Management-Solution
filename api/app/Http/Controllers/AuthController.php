@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Traits\ApiResponser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
@@ -9,6 +10,8 @@ use App\Models\User;
 
 class AuthController extends Controller
 {
+    use ApiResponser;
+
     public function signup(Request $request)
     {
         $request->validate([
@@ -51,9 +54,7 @@ class AuthController extends Controller
         $credentials = request(['email', 'password']);
 
         if (!Auth::attempt($credentials))
-            return response()->json([
-                'message' => 'Unauthorized'
-            ], 401);
+            return $this->errorResponse('Unauthorized', 401);
 
         $user = $request->user();
 
@@ -65,13 +66,13 @@ class AuthController extends Controller
 
         $token->save();
 
-        return response()->json([
+        return $this->successResponse([
             'access_token' => $tokenResult->accessToken,
             'token_type' => 'Bearer',
             'expires_at' => Carbon::parse(
                 $tokenResult->token->expires_at
             )->toDateTimeString()
-        ]);
+        ], 200);
     }
 
     /**
@@ -83,9 +84,7 @@ class AuthController extends Controller
     {
         $request->user()->token()->revoke();
 
-        return response()->json([
-            'message' => 'Successfully logged out'
-        ]);
+        return $this->successResponse( 'Successfully logged out', 200);
     }
 
     /**
@@ -95,6 +94,6 @@ class AuthController extends Controller
      */
     public function user(Request $request)
     {
-        return response()->json($request->user());
+        return $this->successResponse($request->user(), 200);
     }
 }
